@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Globe, MessageSquare, ShoppingBag, User, Users, Package, ClipboardList } from 'lucide-react';
+import { Home, Globe, MessageSquare, ShoppingBag, User, Users, Package, ClipboardList, Building2, Coins } from 'lucide-react';
 import NavItem from './NavItem';
 import { useApp } from '../../context/AppContext';
 import { useAuth } from '../../context/AuthContext';
@@ -37,9 +37,26 @@ export default function BottomNav() {
       {role === ROLES.AGENT && (
         <>
           <NavItem icon={<Home size={22} />} label="Trang chủ" isActive={activeTab === 'home'} onClick={() => setActiveTab('home')} />
-          <NavItem icon={<Globe size={22} />} label="Feed" isActive={activeTab === 'feed'} onClick={() => setActiveTab('feed')} />
-          <ChatButton activeTab={activeTab} setActiveTab={setActiveTab} />
-          <NavItem icon={<Users size={22} />} label="Đội nhóm" isActive={activeTab === 'agentTree'} onClick={() => setActiveTab('agentTree')} />
+          <NavItem icon={<Building2 size={22} />} label="Đối tác" isActive={activeTab === 'agentSuppliers'} onClick={() => setActiveTab('agentSuppliers')} />
+          <div className="relative -top-5">
+            <button
+              onClick={() => setActiveTab('agentCustomers')}
+              className={`w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform border-4 border-white ${
+                activeTab === 'agentCustomers'
+                  ? 'bg-gray-900 text-white shadow-gray-500/30 scale-105'
+                  : 'bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow-teal-500/30 hover:scale-105'
+              }`}
+            >
+              <Users size={24} />
+              {activeTab !== 'agentCustomers' && (
+                <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-rose-500 border-2 border-white rounded-full" />
+              )}
+            </button>
+            <span className={`absolute -bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-bold whitespace-nowrap ${activeTab === 'agentCustomers' ? 'text-gray-900' : 'text-gray-500'}`}>
+              Khách hàng
+            </span>
+          </div>
+          <NavItem icon={<Coins size={22} />} label="Hoa hồng" isActive={activeTab === 'agentCommission'} onClick={() => setActiveTab('agentCommission')} />
           <NavItem icon={<User size={22} />} label="Cá nhân" isActive={activeTab === 'profile'} onClick={() => setActiveTab('profile')} />
         </>
       )}

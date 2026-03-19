@@ -1,6 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { RefreshCw } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { ROLES, ROLE_LABELS } from '../constants/roles';
+
+function UpdateAppButton() {
+  const [status, setStatus] = useState(null);
+
+  const handleUpdate = async () => {
+    setStatus('updating');
+    try {
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map(r => r.unregister()));
+      }
+      if ('caches' in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+      }
+      setStatus('done');
+      setTimeout(() => window.location.reload(true), 600);
+    } catch {
+      window.location.reload(true);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleUpdate}
+      disabled={status === 'updating'}
+      className="w-full py-3 flex items-center justify-center gap-2 bg-gray-50 text-gray-500 font-bold rounded-xl border border-gray-100 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-100 transition-colors disabled:opacity-60"
+    >
+      <RefreshCw size={15} className={status === 'updating' ? 'animate-spin' : ''} />
+      {status === 'done' ? 'Đang tải lại...' : status === 'updating' ? 'Đang xoá cache...' : 'Cập nhật phần mềm'}
+    </button>
+  );
+}
 
 export default function ProfileScreen() {
   const { currentUser, role, handleLogout } = useAuth();
@@ -28,7 +62,8 @@ export default function ProfileScreen() {
         </div>
       </div>
 
-      <div className="w-full mt-4">
+      <div className="w-full mt-4 flex flex-col gap-2">
+        <UpdateAppButton />
         <button onClick={handleLogout} className="w-full py-3 bg-red-50 text-red-600 font-bold rounded-xl border border-red-100 hover:bg-red-100 transition-colors">
           Đăng xuất an toàn
         </button>

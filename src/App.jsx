@@ -12,6 +12,10 @@ import ProfileScreen from './screens/ProfileScreen';
 
 import AgentDashboard from './screens/agent/AgentDashboard';
 import AgentTreeView from './screens/agent/AgentTreeView';
+import AgentSupplierHub from './screens/agent/AgentSupplierHub';
+import AgentCatalog from './screens/agent/AgentCatalog';
+import AgentCommission from './screens/agent/AgentCommission';
+import AgentCustomers from './screens/agent/AgentCustomers';
 
 import SupplierDashboard from './screens/supplier/SupplierDashboard';
 import SupplierProducts from './screens/supplier/SupplierProducts';
@@ -41,16 +45,18 @@ function UserApp() {
 
 function AgentApp() {
   const { activeTab } = useApp();
-  const showHeader = activeTab === 'home';
   return (
     <>
-      {showHeader && <AppHeader />}
       <div className="flex-1 overflow-y-auto hide-scrollbar pb-24 bg-gray-50">
-        {activeTab === 'home'      && <AgentDashboard />}
-        {activeTab === 'agentTree' && <AgentTreeView />}
-        {activeTab === 'chat'      && <ChatScreen />}
-        {activeTab === 'feed'      && <FeedScreen />}
-        {activeTab === 'profile'   && <ProfileScreen />}
+        {activeTab === 'home'             && <AgentDashboard />}
+        {activeTab === 'agentTree'        && <AgentTreeView />}
+        {activeTab === 'agentSuppliers'   && <AgentSupplierHub />}
+        {activeTab === 'agentCatalog'     && <AgentCatalog />}
+        {activeTab === 'agentCommission'  && <AgentCommission />}
+        {activeTab === 'agentCustomers'   && <AgentCustomers />}
+        {activeTab === 'chat'             && <ChatScreen />}
+        {activeTab === 'feed'             && <FeedScreen />}
+        {activeTab === 'profile'          && <ProfileScreen />}
       </div>
       <BottomNav />
     </>
@@ -59,10 +65,8 @@ function AgentApp() {
 
 function SupplierApp() {
   const { activeTab } = useApp();
-  const showHeader = activeTab === 'home';
   return (
     <>
-      {showHeader && <AppHeader />}
       <div className="flex-1 overflow-y-auto hide-scrollbar pb-24 bg-gray-50">
         {activeTab === 'home'             && <SupplierDashboard />}
         {activeTab === 'supplierProducts' && <SupplierProducts />}

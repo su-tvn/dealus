@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Phone, ArrowRight, Coins } from 'lucide-react';
 import DealusLogo from '../components/common/DealusLogo';
 import { ROLES, ROLE_LABELS } from '../constants/roles';
@@ -6,10 +6,11 @@ import { useAuth } from '../context/AuthContext';
 
 export default function LoginScreen() {
   const { handleLogin } = useAuth();
+  const [demoRole, setDemoRole] = useState(ROLES.USER);
 
-  const onSubmit = (e, role) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    handleLogin(role || ROLES.USER);
+    handleLogin(demoRole);
   };
 
   return (
@@ -56,8 +57,8 @@ export default function LoginScreen() {
           </div>
         </div>
 
-        {/* Phone input form (signs in as User) */}
-        <form onSubmit={(e) => onSubmit(e, ROLES.USER)} className="flex flex-col gap-4">
+        {/* Phone input form */}
+        <form onSubmit={onSubmit} className="flex flex-col gap-4">
           <div className="space-y-1.5">
             <label className="text-[11px] font-bold text-gray-400 ml-1 uppercase tracking-wider">Số điện thoại</label>
             <div className="relative group">
@@ -74,6 +75,20 @@ export default function LoginScreen() {
             </div>
           </div>
 
+          {/* Demo role selector */}
+          <div className="space-y-1.5">
+            <label className="text-[11px] font-bold text-gray-400 ml-1 uppercase tracking-wider">Chế độ Demo — Vai trò</label>
+            <select
+              value={demoRole}
+              onChange={(e) => setDemoRole(e.target.value)}
+              className="w-full bg-white/80 border border-gray-200 text-gray-800 font-semibold rounded-2xl py-3.5 px-4 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all shadow-sm appearance-none cursor-pointer"
+            >
+              {Object.values(ROLES).map((r) => (
+                <option key={r} value={r}>{ROLE_LABELS[r]}</option>
+              ))}
+            </select>
+          </div>
+
           <button
             type="submit"
             className="w-full bg-gray-900 text-white font-bold text-[15px] py-4 rounded-2xl shadow-xl shadow-gray-900/15 hover:bg-gray-800 hover:-translate-y-0.5 active:scale-95 transition-all mt-2 flex justify-center items-center gap-2"
@@ -88,31 +103,14 @@ export default function LoginScreen() {
         </div>
 
         <div className="grid grid-cols-2 gap-3 mt-4">
-          <button type="button" onClick={(e) => onSubmit(e, ROLES.USER)} className="flex items-center justify-center gap-2 border border-gray-100 bg-white rounded-2xl py-3.5 hover:bg-gray-50 hover:border-gray-200 transition-all shadow-sm">
+          <button type="button" onClick={onSubmit} className="flex items-center justify-center gap-2 border border-gray-100 bg-white rounded-2xl py-3.5 hover:bg-gray-50 hover:border-gray-200 transition-all shadow-sm">
             <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
             <span className="text-[13px] font-bold text-gray-600">Google</span>
           </button>
-          <button type="button" onClick={(e) => onSubmit(e, ROLES.USER)} className="flex items-center justify-center gap-2 border border-gray-100 bg-white rounded-2xl py-3.5 hover:bg-gray-50 hover:border-gray-200 transition-all shadow-sm">
+          <button type="button" onClick={onSubmit} className="flex items-center justify-center gap-2 border border-gray-100 bg-white rounded-2xl py-3.5 hover:bg-gray-50 hover:border-gray-200 transition-all shadow-sm">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt="Facebook" className="w-5 h-5" />
             <span className="text-[13px] font-bold text-gray-600">Facebook</span>
           </button>
-        </div>
-
-        {/* Role switcher for demo */}
-        <div className="mt-6 border border-dashed border-gray-200 rounded-2xl p-4">
-          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider text-center mb-3">Chế độ Demo — Chọn vai trò</p>
-          <div className="flex flex-col gap-2">
-            {Object.values(ROLES).map((r) => (
-              <button
-                key={r}
-                type="button"
-                onClick={(e) => onSubmit(e, r)}
-                className="w-full py-2.5 text-xs font-bold rounded-xl border border-gray-200 bg-gray-50 text-gray-700 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-colors"
-              >
-                {ROLE_LABELS[r]}
-              </button>
-            ))}
-          </div>
         </div>
       </div>
 
