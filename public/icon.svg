@@ -1,8 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#1d4ed8"/>
-  <g transform="translate(256,256)" fill="none" stroke="white" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M130 -66V66a20 20 0 0 1-10 17.3l-90 52a20 20 0 0 1-20 0l-90-52A20 20 0 0 1-90 66V-66a20 20 0 0 1 10-17.3l90-52a20 20 0 0 1 20 0l90 52A20 20 0 0 1 130-66z"/>
-    <polyline points="-90,-79 0,-26 90,-79"/>
-    <line x1="0" y1="139" x2="0" y2="0"/>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1e40af"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <g transform="translate(256,256)" fill="none" stroke="white" stroke-width="20" stroke-linecap="round">
+    <g transform="rotate(0) translate(173,0) rotate(180)"><path d="M 0,-116 L 0,116 M 0,-116 A 116,116 0 0,1 0,116"/></g>
+    <g transform="rotate(120) translate(173,0) rotate(180)"><path d="M 0,-116 L 0,116 M 0,-116 A 116,116 0 0,1 0,116"/></g>
+    <g transform="rotate(240) translate(173,0) rotate(180)"><path d="M 0,-116 L 0,116 M 0,-116 A 116,116 0 0,1 0,116"/></g>
+    <circle cx="0" cy="0" r="20" fill="white" stroke="none"/>
   </g>
 </svg>
