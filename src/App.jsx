@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { 
   Bell, Search, Coins, Crown, Users, UserCheck, Heart, 
   MessageSquare, Star, MapPin, ShieldCheck, ChevronRight,
-  Home, Headset, ShoppingBag, User, Globe, ArrowRight,
+  Home, ShoppingBag, User, Globe, ArrowRight,
   Phone, Flame, Percent, Eye, Sparkles, Plus, ShoppingCart,
-  Hash, Filter, MessageCircleQuestion, Edit3, Gift, Tv, Building,
+  Hash, Filter, MessageCircle, Edit3, Gift, Tv, Building,
   Layout, UserPlus, Zap, ArrowUpRight, CheckCheck, PhoneCall, Lock
 } from 'lucide-react';
 
@@ -178,9 +178,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center font-sans text-gray-800 pb-20 sm:py-8">
-      {/* Mobile Simulator Container */}
-      <div className="w-full max-w-md bg-white shadow-2xl relative overflow-hidden flex flex-col sm:rounded-[2.5rem] sm:border-8 sm:border-gray-900 h-[100dvh] sm:h-[850px]">
+    <div className="min-h-screen bg-white flex justify-center font-sans text-gray-800">
+      <div className="w-full max-w-md bg-white relative overflow-hidden flex flex-col h-[100dvh]">
         
         {!isAuthenticated ? (
           /* =========================================
@@ -605,7 +604,7 @@ export default function App() {
                             <Users size={14} className="text-gray-400" /> {room.memberCount} thành viên
                           </div>
                           <button className="bg-gray-900 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md hover:bg-gray-800 transition-colors flex items-center gap-1.5">
-                            <MessageCircleQuestion size={14} /> Tham gia ngay
+                            <MessageCircle size={14} /> Tham gia ngay
                           </button>
                         </div>
 
